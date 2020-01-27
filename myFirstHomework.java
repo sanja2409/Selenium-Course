@@ -1,4 +1,4 @@
-package Selenium_training;
+﻿package Selenium_training;
 
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +23,7 @@ public class myFirstHomework {
     @Test
     public void myFirstHomework() {
         driver.get("http://googgle.com/");
-        driver.findElement(By.name("q").sendKeys("Politechnika Gdańska"));
+        driver.findElement(By.name("q")).sendKeys("Politechnika Gdańska");
         driver.findElement(By.name("btnG")).click();
         wait.until(WebDriver::getTitle);
     }
