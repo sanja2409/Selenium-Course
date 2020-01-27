@@ -22,7 +22,7 @@ public class myFirstHomework {
 
     @Test
     public void myFirstHomework() {
-        driver.get("http://googgle.com/");
+        driver.get("http://www.google.com/");
         driver.findElement(By.name("q")).sendKeys("Politechnika Gdańska");
         driver.findElement(By.name("btnG")).click();
         wait.until(WebDriver::getTitle);
