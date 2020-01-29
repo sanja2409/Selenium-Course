@@ -1,4 +1,4 @@
-﻿package Selenium_training;
+package selenium.training;
 
 import org.junit.After;
 import org.junit.Before;
@@ -9,13 +9,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class myFirstHomework {
+public class MyFirstHomework {
 
     private WebDriver driver;
     private WebDriverWait wait;
 
     @Before
-    public  void start () {
+    public void start () {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Tester\\Documents\\Tools\\chromedriver.exe");
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 10);
     }
@@ -23,15 +24,15 @@ public class myFirstHomework {
     @Test
     public void myFirstHomework() {
         driver.get("http://www.google.com/");
-        driver.findElement(By.name("q")).sendKeys("Politechnika Gdańska");
-        driver.findElement(By.name("btnG")).click();
-        wait.until(WebDriver::getTitle);
+        driver.findElement(By.name("q")).sendKeys("webdriver");
+        //driver.findElement(By.name("btnG")).click();
+        //wait.until(WebDriver::getTitle);
+        //wait.until(titleIs("Politechnika Gdańska: Strona Główna"));//
     }
 
     @After
     public void stop() {
         driver.quit();
         driver = null;
-
     }
 }
