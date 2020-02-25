@@ -44,7 +44,7 @@ public class TaskTen {
         String redPriceColor = redPriceElementMainPage.getCssValue("color");
 
         // getting the styles of the price on the main page
-        String grayPriceStyle = grayPriceElementMainPage.getCssValue("text-decoration");
+        String grayPriceStyle = grayPriceElementMainPage.getCssValue("text-decoration-line");
         String redPriceStyle = redPriceElementMainPage.getCssValue("font-weight");
 
         // opening product page
@@ -60,25 +60,12 @@ public class TaskTen {
         String grayPriceProductPage = grayPriceElementProductPage.getAttribute("textContent");
 
         // getting the colors of the price on the product page
-        // String grayPriceColorProductPage = grayPriceElementProductPage.getCssValue("color");
         String grayPriceColorProductPage = grayPriceElementProductPage.getCssValue("color");
         String redPriceColorProductPage = redPriceElementProductPage.getCssValue("color");
 
         // getting the styles of the price on the product page
-        String grayPriceStyleProductPage = grayPriceElementProductPage.getCssValue("text-decoration");
+        String grayPriceStyleProductPage = grayPriceElementProductPage.getCssValue("text-decoration-line");
         String redPriceStyleProductPage = redPriceElementProductPage.getCssValue("font-weight");
-
-        //System.out.println(grayPriceColorProductPage);
-        // int[] greyPrice_RGB_MainPage = convertRGBAtoArray(grayPriceColor);
-
-        //System.out.println(arrayOfString);
-        //int [] greyPrice_RGB_MainPage = rgbNumbers;
-        //System.out.println(greyPrice_RGB_MainPage);
-        //System.out.println(greyPrice_RGB_MainPage.length);
-
-        //System.out.println(greyPrice_RGB_MainPage[0]);
-        //System.out.println(greyPrice_RGB_MainPage[1]);
-        //System.out.println(greyPrice_RGB_MainPage[2]);
 
         // compare name of products
         Assert.assertEquals(productNameMainPage, productNameProductPage);
@@ -90,8 +77,8 @@ public class TaskTen {
         System.out.println(grayPriceColor);
         System.out.println(grayPriceColorProductPage);
 
-        Assert.assertEquals(redPriceColor, redPriceColorProductPage);
-        Assert.assertEquals(grayPriceColor, grayPriceColorProductPage);
+        //Assert.assertEquals(redPriceColor, redPriceColorProductPage);
+        //Assert.assertEquals(grayPriceColor, grayPriceColorProductPage);
 
         // checking if price is red
         int[] redPriceMainPAgeRGB = changeRGBAtoIntList(redPriceColor);
@@ -116,7 +103,6 @@ public class TaskTen {
     {
         int colorStringLength = colorRGBA.length();
         String colorText = colorRGBA.substring(5, (colorStringLength - 1));
-        //System.out.println(grayText);
         String[] arrayOfString = colorText.split(",");
         int[] RGBAIntList = new int[3];
         for (int i = 0; i < 3; i++) {
