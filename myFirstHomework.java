@@ -16,7 +16,7 @@ public class MyFirstHomework {
 
     @Before
     public void start () {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Tester\\Documents\\Tools\\chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "C:\\Users\\Tester\\Documents\\Tools\\chromedriver.exe");
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 10);
     }
@@ -24,10 +24,7 @@ public class MyFirstHomework {
     @Test
     public void myFirstHomework() {
         driver.get("http://www.google.com/");
-        driver.findElement(By.name("q")).sendKeys("webdriver");
-        //driver.findElement(By.name("btnG")).click();
-        //wait.until(WebDriver::getTitle);
-        //wait.until(titleIs("Politechnika Gdańska: Strona Główna"));//
+        driver.findElement(By.name("q")).sendKeys("Politechnika Gdańska");
     }
 
     @After
