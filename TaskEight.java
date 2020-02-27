@@ -30,18 +30,22 @@ public class TaskEight {
         driver.get("http://localhost/litecart/");
         List<WebElement> allProducts = driver.findElements(By.cssSelector("li.product"));
         int numberOfProducts= allProducts.size();
-        
-        List <WebElement> stickers = driver.findElements(By.cssSelector("div.sticker"));
-        int numberOfStickers= stickers.size();
+        System.out.println(numberOfProducts);
 
-        Assert.assertEquals(numberOfProducts,numberOfStickers);
+        int[] numberOfStickers = new int[allProducts.size()];
 
-       //if (Assert.assertEquals(numberOfProducts,numberOfStickers)) {
-       //     System.out.println("OK");
-        //}
-        //for ([i] in allProducts): {
-        //        System.out.println(elm + "has more than one sticker");
-        //}
+        for (int i=0; i<allProducts.size(); i++)
+        {
+            List <WebElement> stickers = allProducts.get(i).findElements(By.cssSelector("div.sticker"));
+            numberOfStickers[i] = stickers.size();
+        }
+
+        System.out.println(numberOfStickers.length);
+
+        for (int i=0; i<numberOfStickers.length; i++)
+        {
+           Assert.assertEquals(1,numberOfStickers[i]);
+        }
 
     }
 
