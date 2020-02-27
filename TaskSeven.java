@@ -11,6 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
+import static org.junit.Assert.assertTrue;
+
 
 
 public class TaskSeven {
@@ -36,6 +38,7 @@ public class TaskSeven {
 
         //driver.findElements(By.cssSelector("li.app-"));
         //driver.findElements(By.cssSelector("span.name"));
+        /*
         driver.findElement(By.xpath("//li[contains(@id,'app')]//span[text()='Appearence']")).click();
         driver.findElement(By.xpath("//li[contains(@id,'app')]//span[text()='Template']")).click();
         driver.findElement(By.xpath("//li[contains(@id,'app')]//span[text()='Logotype']")).click();
@@ -47,7 +50,24 @@ public class TaskSeven {
         List<WebElement> checkHeader = driver.findElements(By.xpath("//td[contains(@id,'content')]"));
         WebElement headerSuppliers = driver.findElement(By.xpath("//h1[text()=' Suppliers']"));
         Assert.assertEquals(headerSuppliers," Suppliers");
-    }
+    */
+        List <WebElement> elementsInMenu =  driver.findElements(By.xpath("//li[contains(@id,'app')]/a/span[2]"));
+
+        for (int i=0; i < elementsInMenu.size(); i++) {
+            elementsInMenu =  driver.findElements(By.xpath("//li[contains(@id,'app')]/a/span[2]"));
+            elementsInMenu.get(i).click();
+            WebElement menuHeader = driver.findElement(By.xpath("//td[contains(@id,'content')]//h1[text()]"));
+            assertTrue(menuHeader.isDisplayed());
+            List<WebElement> elementsInSubmenu = driver.findElements(By.xpath("//li[contains(@id,'app')]/ul/li"));
+            if (elementsInSubmenu.size() > 0)
+                for (int j=0; j < elementsInSubmenu.size(); j++) {
+                    elementsInSubmenu = driver.findElements(By.xpath("//li[contains(@id,'app')]/ul/li"));
+                    elementsInSubmenu.get(j).click();
+                    WebElement submenuHeader = driver.findElement(By.xpath("//td[contains(@id,'content')]/h1[text()]"));
+                    assertTrue(submenuHeader.isDisplayed());
+               }
+            }
+        }
 
 
     @After
