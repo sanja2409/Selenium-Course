@@ -1,6 +1,7 @@
 package selenium.training;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -10,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 import java.util.Set;
 
@@ -54,99 +56,46 @@ public class TaskFourteen {
 
         WebElement firstLink = driver.findElement(By.xpath("//a[contains(@href,'ISO_3166-1_alpha-2')]"));
         wait.until(elementToBeClickable(firstLink)).click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        //firstLink.click();
-        Set<String> newExistingWindows = driver.getWindowHandles();
-        System.out.println(newExistingWindows);
-        String firstNewWindow = new ArrayList<>(newExistingWindows).get(1);
-        System.out.println(firstNewWindow);
-        driver.switchTo().window(firstNewWindow);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.close();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.switchTo().window(mainWindow);
+        switchWindows (mainWindow);
 
         WebElement secondLink = driver.findElement(By.xpath("//a[contains(@href,'ISO_3166-1_alpha-2')]"));
         wait.until(elementToBeClickable(secondLink)).click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        Set<String> newExistingWindows2 = driver.getWindowHandles();
-        System.out.println(newExistingWindows2);
-        String secondNewWindow = new ArrayList<>(newExistingWindows2).get(1);
-        System.out.println(secondNewWindow);
-        driver.switchTo().window(secondNewWindow);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.close();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.switchTo().window(mainWindow);
+        switchWindows (mainWindow);
 
         WebElement taxIdLink = driver.findElement(By.xpath("//*[@id='content']/form/table[1]/tbody/tr[6]/td/a"));
         wait.until(elementToBeClickable(taxIdLink)).click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        Set<String> newExistingWindows3 = driver.getWindowHandles();
-        System.out.println(newExistingWindows3);
-        String NewWindow3 = new ArrayList<>(newExistingWindows3).get(1);
-        System.out.println(NewWindow3);
-        driver.switchTo().window(NewWindow3);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.close();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.switchTo().window(mainWindow);
+        switchWindows (mainWindow);
 
         WebElement addressLink = driver.findElement(By.xpath("//a[contains(@href,'address-formats')]"));
         wait.until(elementToBeClickable(addressLink)).click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        Set<String> newExistingWindows4 = driver.getWindowHandles();
-        System.out.println(newExistingWindows4);
-        String NewWindow4 = new ArrayList<>(newExistingWindows4).get(1);
-        System.out.println(NewWindow4);
-        driver.switchTo().window(NewWindow4);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.close();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.switchTo().window(mainWindow);
-
+        switchWindows (mainWindow);
 
         WebElement postcodeLink = driver.findElement(By.xpath("//*[@id='content']/form/table[1]/tbody/tr[8]/td/a"));
         wait.until(elementToBeClickable(postcodeLink)).click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        Set<String> newExistingWindows5 = driver.getWindowHandles();
-        System.out.println(newExistingWindows5);
-        String NewWindow5 = new ArrayList<>(newExistingWindows5).get(1);
-        System.out.println(NewWindow5);
-        driver.switchTo().window(NewWindow5);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.close();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.switchTo().window(mainWindow);
+        switchWindows (mainWindow);
 
         WebElement currencyCodeLink = driver.findElement(By.xpath("//a[contains(@href,'List_of_countries_and_capitals_with_currency_and_language')]"));
         wait.until(elementToBeClickable(currencyCodeLink)).click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        Set<String> newExistingWindows6 = driver.getWindowHandles();
-        System.out.println(newExistingWindows6);
-        String NewWindow6 = new ArrayList<>(newExistingWindows6).get(1);
-        System.out.println(NewWindow6);
-        driver.switchTo().window(NewWindow6);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.close();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.switchTo().window(mainWindow);
+        switchWindows (mainWindow);
 
         WebElement phoneCountryLink = driver.findElement(By.xpath("//a[contains(@href,'List_of_country_calling_codes')]"));
         wait.until(elementToBeClickable(phoneCountryLink)).click();
+        switchWindows (mainWindow);
+
+    }
+
+    private void switchWindows(String mainWindow) {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        Set<String> newExistingWindows7 = driver.getWindowHandles();
-        System.out.println(newExistingWindows7);
-        String NewWindow7 = new ArrayList<>(newExistingWindows7).get(1);
-        System.out.println(NewWindow7);
-        driver.switchTo().window(NewWindow7);
+        Set<String> newExistingWindows = driver.getWindowHandles();
+        System.out.println(newExistingWindows);
+        String NewWindow = new ArrayList<>(newExistingWindows).get(1);
+        System.out.println(NewWindow);
+        driver.switchTo().window(NewWindow);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.close();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.switchTo().window(mainWindow);
-
-
-    }
+     }
 
     @After
     public void stop() {
