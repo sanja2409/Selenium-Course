@@ -11,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.Set;
 
@@ -50,39 +50,22 @@ public class TaskFourteen {
         Set<String> existingWindows = driver.getWindowHandles();
         System.out.println(existingWindows);
 
+
         WebElement linkToAustralia = driver.findElement(By.xpath("//table[contains(@class,'dataTable')]//a[text()='Australia']"));
         wait.until(elementToBeClickable(linkToAustralia)).click();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        WebElement firstLink = driver.findElement(By.xpath("//a[contains(@href,'ISO_3166-1_alpha-2')]"));
-        wait.until(elementToBeClickable(firstLink)).click();
-        switchWindows (mainWindow);
+        List <WebElement> outsideLinks = driver.findElements(By.xpath("//*[@id='content']/form/table[1]/tbody/tr/td/a"));
+        System.out.println(outsideLinks);
 
-        WebElement secondLink = driver.findElement(By.xpath("//a[contains(@href,'ISO_3166-1_alpha-2')]"));
-        wait.until(elementToBeClickable(secondLink)).click();
-        switchWindows (mainWindow);
-
-        WebElement taxIdLink = driver.findElement(By.xpath("//*[@id='content']/form/table[1]/tbody/tr[6]/td/a"));
-        wait.until(elementToBeClickable(taxIdLink)).click();
-        switchWindows (mainWindow);
-
-        WebElement addressLink = driver.findElement(By.xpath("//a[contains(@href,'address-formats')]"));
-        wait.until(elementToBeClickable(addressLink)).click();
-        switchWindows (mainWindow);
-
-        WebElement postcodeLink = driver.findElement(By.xpath("//*[@id='content']/form/table[1]/tbody/tr[8]/td/a"));
-        wait.until(elementToBeClickable(postcodeLink)).click();
-        switchWindows (mainWindow);
-
-        WebElement currencyCodeLink = driver.findElement(By.xpath("//a[contains(@href,'List_of_countries_and_capitals_with_currency_and_language')]"));
-        wait.until(elementToBeClickable(currencyCodeLink)).click();
-        switchWindows (mainWindow);
-
-        WebElement phoneCountryLink = driver.findElement(By.xpath("//a[contains(@href,'List_of_country_calling_codes')]"));
-        wait.until(elementToBeClickable(phoneCountryLink)).click();
-        switchWindows (mainWindow);
+        for (int i=0; i < outsideLinks.size(); i++) {
+            outsideLinks =  driver.findElements(By.xpath("//*[@id='content']/form/table[1]/tbody/tr/td/a/i"));
+            wait.until(elementToBeClickable(outsideLinks.get(i))).click();
+            switchWindows (mainWindow);
+        }
 
     }
+
 
     private void switchWindows(String mainWindow) {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
