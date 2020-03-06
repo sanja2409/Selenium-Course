@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
@@ -30,30 +31,30 @@ public class TaskThirteen {
     @Test
     public void addProductToCart() {
         driver.get("http://localhost/litecart/en/");
-
-        WebElement product = driver.findElement(By.xpath("//div[contains(@id,'box-latest-products')]//ul[contains(@class,'listing-wrapper')]//li[3]//div[starts-with(@class,'name')]"));
-        wait.until(elementToBeClickable(product)).click();
         String addCartProduct = "add_cart_product";
-        int item = 0;
-        addToCart(addCartProduct, item);
 
-        driver.findElement(By.xpath("//div[contains(@id,'box-latest-products')]//ul[contains(@class,'listing-wrapper')]//li[4]//div[starts-with(@class,'name')]")).click();
-        int item1 = 1;
-        addToCart(addCartProduct, item1);
+        int chosenProductAmount = 3;
 
-        driver.findElement(By.xpath("//div[contains(@id,'box-latest-products')]//ul[contains(@class,'listing-wrapper')]//li[5]//div[starts-with(@class,'name')]")).click();
-        int item2 = 2;
-        addToCart(addCartProduct, item2);
+        List <WebElement> products = driver.findElements(By.xpath("//div[contains(@id,'box-latest-products')]//ul[contains(@class,'listing-wrapper')]//li//div[starts-with(@class,'name')]"));
 
-        driver.findElement(By.cssSelector("div#cart")).click();
+        for (int i=0; i < chosenProductAmount; i++) {
+            products =  driver.findElements(By.xpath("//div[contains(@id,'box-latest-products')]//ul[contains(@class,'listing-wrapper')]//li//div[starts-with(@class,'name')]"));
+            wait.until(elementToBeClickable(products.get(i+1))).click();
+            addToCart(addCartProduct, i);
+        }
+        
+        driver.findElement(By.cssSelector("div#cart a.content")).click();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-        wait.until(visibilityOfElementLocated(By.cssSelector("a.inact"))).click();
-        wait.until(visibilityOfElementLocated(By.name("remove_cart_item"))).click();
-        wait.until(visibilityOfElementLocated(By.cssSelector("a.act"))).click();
-        wait.until(visibilityOfElementLocated(By.name("remove_cart_item"))).click();
-        wait.until(visibilityOfElementLocated(By.name("remove_cart_item"))).click();
-
+        List <WebElement> productsInBasket =  driver.findElements(By.cssSelector("a.inact"));
+        for (int i=0; i<chosenProductAmount; i++)
+        {
+            wait.until(numberOfElementsToBe(By.cssSelector("td.item"), chosenProductAmount--));
+            productsInBasket =  driver.findElements(By.cssSelector("li.shortcut a"));
+            wait.until(elementToBeClickable(productsInBasket.get(0))).click();
+            wait.until(visibilityOfElementLocated(By.name("remove_cart_item"))).click();
+            wait.until(stalenessOf(productsInBasket.get(0)));
+        }
     }
 
     private void addToCart(String addCartProduct, int item) {
@@ -64,7 +65,6 @@ public class TaskThirteen {
         wait.until(attributeContains(cartItem, "textContent", itemsExpectedNumberAsString));
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.findElement(By.className("general-0")).click();
-
     }
 
     @After
